@@ -1,0 +1,41 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+<h2>Por pais</h2>
+<hr>
+
+<div class="col">
+    <div class="row">
+     <app-pais-input 
+                    (onEnter)="buscar($event)"
+                    (onDebounce)="subgerencias($event)"
+                     placeholder="Buscar por pais"></app-pais-input>
+    </div>
+</div>
+
+        <div class="row">
+            <ul class="list-group" *ngIf="mostrarSubgerencias">
+            <li     *ngFor="let pais of paisesSubgeridos"
+                    class="list-group-item  list-group-item-action">
+                    <a class="nav-link"
+                       [routerLink]="['/pais',pais.alpha2Code]"> {{pais.name}}</a>
+              
+            </li>
+
+            <li class="list-group-item  list-group-item-action"
+                (click)="buscarSubgerido(termino)">
+            <a  class="nav-link"> Buscar "{{termino}}"</a>
+      
+    </li>
+            </ul>
+        </div>
+<hr>
+
+<div  *ngIf="hayerror" class="alert alert-danger">
+    no se encontro el termino {{termino}}
+</div>
+
+<div class="row" *ngIf="paises.length > 0">
+    <div class="col">
+        <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    </div>
+</div>
+</div>
